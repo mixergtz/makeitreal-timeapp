@@ -2,12 +2,46 @@ class ActivitiesController < ApplicationController
   before_action :redirect_not_logged
 
   def index
+
+    if activity_pending?
+      @activity = Activity.last
+    else
+      @activity = Activity.new
+    end
+
+    @activities = Activity.all.where.not(ended_at: nil)
+
+  end
+
+  def create
+    @activity = Activity.new(set_params)
+    @activity.started_at = DateTime.now
+    if @activity.save
+      redirect_to dashboard_path
+    else
+      render "index"
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    @activity = Activity.find(params[:id])
+    @activity.update_attributes(set_params)
+    @activity.ended_at = DateTime.now
+    if @activity.save
+      redirect_to dashboard_path
+    else
+      render "index"
+    end
   end
 
   private
 
-  def redirect_not_logged
-    redirect_to login_path unless logged_in?
+  def set_params
+    params.require(:activity).permit(:description, :project_id)
   end
+
 
 end

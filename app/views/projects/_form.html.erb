@@ -1,0 +1,12 @@
+<%= form_for @project, remote: true do |f| %>
+  <div class="modal-body">
+      <div class="form-group">
+        <%= f.label :name, "Name" %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <%= f.submit "Create Project", class: "btn btn-primary", id: "btn-submit" %>
+  </div>
+<% end %>

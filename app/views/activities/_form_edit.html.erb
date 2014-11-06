@@ -1,0 +1,11 @@
+<%= form_for @activity,  html: { class: "row" } do |f| %>
+  <div class="form-group col-sm-3">
+    <%= f.select(:project_id, options_from_collection_for_select(Project.all, :id, :name, @activity.project_id), {}, class: "form-control") %>
+  </div>
+  <div class="form-group col-sm-8">
+    <%= f.text_field :description, placeholder: "¿En qué estás trabajando?", class: "form-control" %>
+  </div>
+  <div class="col-sm-1">
+    <input class="btn btn-danger" type="submit" value="Stop" id="#toggleActivity" />
+  </div>
+<% end %>
