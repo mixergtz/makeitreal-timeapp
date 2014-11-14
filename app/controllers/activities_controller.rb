@@ -28,8 +28,7 @@ class ActivitiesController < ApplicationController
 
   def update
     @activity = Activity.find(params[:id])
-    @activity.update_attributes(set_params)
-    @activity.ended_at = DateTime.now
+    @activity.update_attributes(set_params.merge(ended_at: DateTime.now))
     if @activity.save
       redirect_to dashboard_path
     else
