@@ -1,5 +1,7 @@
 class ActivitiesController < ApplicationController
+  include ActivitiesHelper
   before_action :redirect_not_logged
+
 
   def index
 
@@ -9,7 +11,6 @@ class ActivitiesController < ApplicationController
       @activity = Activity.new
     end
 
-    # @activities = Activity.all.where.not(ended_at: nil)
     @activities = Activity.pending
 
   end
