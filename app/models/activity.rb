@@ -11,4 +11,8 @@ class Activity < ActiveRecord::Base
   def set_date
     self.started_at = DateTime.now
   end
+
+  def self.something_pending?
+    self.last && self.last.ended_at == nil
+  end
 end

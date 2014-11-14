@@ -1,11 +1,10 @@
 class ActivitiesController < ApplicationController
-  include ActivitiesHelper
   before_action :redirect_not_logged
 
 
   def index
 
-    if activity_pending?
+    if Activity.something_pending?
       @activity = Activity.last
     else
       @activity = Activity.new
