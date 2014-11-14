@@ -24,8 +24,7 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    @project.update_attributes(set_params)
-    if @project.save
+    if @project.update_attributes(set_params)
       render "success"
     else
       render "edit"
