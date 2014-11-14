@@ -9,13 +9,13 @@ class ActivitiesController < ApplicationController
       @activity = Activity.new
     end
 
-    @activities = Activity.all.where.not(ended_at: nil)
+    # @activities = Activity.all.where.not(ended_at: nil)
+    @activities = Activity.pending
 
   end
 
   def create
     @activity = Activity.new(set_params)
-    @activity.started_at = DateTime.now
     if @activity.save
       redirect_to dashboard_path
     else
